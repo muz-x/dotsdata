@@ -2,6 +2,7 @@
 # df = pd.DataFrame()
 import json
 from time import sleep
+import collections
 
 attributes = set()
 counter = 0
@@ -18,4 +19,7 @@ with open('metadata.json', 'r') as f:
         counter += 1
 
 print(counter)
-print(json.dumps(attribute_counter))
+od = collections.OrderedDict(sorted(attribute_counter.items()))
+for x in attribute_counter:
+    od[x] = collections.OrderedDict(sorted(od[x].items()))
+print(json.dumps(od))
